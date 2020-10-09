@@ -1,2 +1,2 @@
 # JSON
-Provides support for JASON
+Provides support for JSON
