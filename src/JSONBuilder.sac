@@ -1,0 +1,20 @@
+class JSONBuilder;
+external classtype;
+
+use JSONObject: all;
+
+export all except {JSONBuilderObj}
+
+external objdef JSONBuilder JSONBuilderObj;
+
+external JSONObject createJSONObject( /*TermFile& stream*/);
+	#pragma effect JSONBuilderObj, TheTerminal
+	#pragma linkname "create_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [0,1]
+
+external String serializeJSONObject( JSONObject& object);
+	#pragma effect JSONBuilderObj, TheTerminal
+	#pragma linkname "serialize_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [0,1]
