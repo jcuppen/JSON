@@ -1,0 +1,9 @@
+build/*
+
+*.o
+
+src/host/
+src/tree/
+
+*.out
+*.out.c

@@ -1,0 +1,17 @@
+module JSONBuilder;
+
+use JSONObject: all;
+use Terminal: {TheTerminal};
+
+export all;
+
+external JSONObject createJSONObject();
+	#pragma linkname "create_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [0]
+
+external void serializeJSONObject( JSONObject& object);
+	#pragma effect TheTerminal
+	#pragma linkname "serialize_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1]
