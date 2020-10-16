@@ -5,7 +5,7 @@ use Terminal: {TheTerminal};
 
 export all;
 
-external JSONObject createJSONObject( /*TermFile& stream*/);
+external JSONObject createJSONObject();
 	#pragma linkname "create_object"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0]

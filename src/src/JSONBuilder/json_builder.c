@@ -1,7 +1,7 @@
 #include <cjson/cJSON.h>
 #include <stdio.h>
 
-cJSON * create_object( /*FILE* stream*/)
+cJSON * create_object()
 {
 	return cJSON_CreateObject();
 }

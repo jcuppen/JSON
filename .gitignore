@@ -4,3 +4,6 @@ build/*
 
 src/host/
 src/tree/
+
+*.out
+*.out.c

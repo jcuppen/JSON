@@ -18,7 +18,7 @@ SET (SAC_SRC
 # For every C source, compile an object file maintaining the right location
 # in the binary dir so that sac files can pick it up.
 
-foreach(name ${C_DEPS_SRC})
+FOREACH (name ${C_DEPS_SRC})
   SET (src "${CMAKE_CURRENT_SOURCE_DIR}/${name}")
   GET_FILENAME_COMPONENT (dir ${name} DIRECTORY)
   GET_FILENAME_COMPONENT (dst ${name} NAME_WE)
@@ -35,13 +35,13 @@ foreach(name ${C_DEPS_SRC})
     COMMAND ${SAC2C} -v0 -noprelude -cc ccmod -o "${dst}" "${src}"
     COMMENT "Generating ${dst}"
   )
-endforeach(name)
+ENDFOREACH (name)
 
 # Make a directory for sac2c output
 FILE (MAKE_DIRECTORY "${DLL_BUILD_DIR}/${TARGET_ENV}/${SBI}")
 
 # For every sac file, compile Tree and Mod files.
-foreach (name ${SAC_SRC})
+FOREACH (name ${SAC_SRC})
   SET (src "${CMAKE_CURRENT_SOURCE_DIR}/${name}")
   # sac2c requires computes objectfiles relatively to the working directory
   # of the call to sac2c.
@@ -76,4 +76,4 @@ foreach (name ${SAC_SRC})
   # Make a call to the command that compiles the module a part
   # of the default build process.
   ADD_CUSTOM_TARGET (${TARGET}-module-${dst} ALL DEPENDS ${mod} ${tree})
-endforeach (name)
+ENDFOREACH (name)
