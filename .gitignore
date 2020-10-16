@@ -1,1 +1,6 @@
 build/*
+
+*.o
+
+src/host/
+src/tree/

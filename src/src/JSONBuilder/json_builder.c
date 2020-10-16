@@ -1,13 +1,14 @@
-#include <yaml.h>
-
-#include "sac.h"
+#include <cjson/cJSON.h>
+#include <stdio.h>
 
 cJSON * create_object( /*FILE* stream*/)
 {
-	return cJSON_CreateObject()
+	return cJSON_CreateObject();
 }
 
-char * serialize_object( cJSON* object)
+void serialize_object( cJSON* object)
 {
-	return cJSON_Print(monitor);
+	char * str;
+	str = cJSON_Print(object);
+	printf("%s\n", str);
 }

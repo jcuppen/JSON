@@ -20,6 +20,9 @@ LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Ensure cJSON is available
 FIND_PACKAGE (cJSON REQUIRED)
 
+
+include_directories (SYSTEM "/usr/local/include" ${CJSON_INCLUDE_DIR})
+
 MESSAGE (${CJSON_LIBRARIES})
 
 # For every target run CMakeLists.txt in src
@@ -28,4 +31,4 @@ FOREACH (TARGET IN ITEMS ${TARGETS})
 ENDFOREACH ()
 
 # This build target is responsible for generating the package sac2crc file
-CREATE_SAC2CRC_TARGET ("jsonmodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "-ljson")
+CREATE_SAC2CRC_TARGET ("jsonmodule" "${DLL_BUILD_DIR}" "${DLL_BUILD_DIR}" "-lcjson")
