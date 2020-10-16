@@ -9,7 +9,7 @@ SET (C_DEPS_SRC
 )
 
 # SaC files relatively to this CMakeLists.txt.
-SET (
+SET (SAC_SRC
   JSONBuilder.sac
   JSONObject.sac
   JSON.sac
