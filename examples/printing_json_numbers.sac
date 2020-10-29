@@ -1,0 +1,22 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_object = createJSONObject();
+	setInt(json_object, "integer", 42);
+	setFloat(json_object, "float", 1.2f);
+	setDouble(json_object, "double", 3.4);
+	serializeJSONObject(json_object);
+	return 0;
+}
+
+// float getFloat()
+// {
+// 	return 1.2f;
+// }
+
+// double getDouble()
+// {
+// 	return 3.4;
+// }

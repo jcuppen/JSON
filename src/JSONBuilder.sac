@@ -11,6 +11,7 @@ external JSONObject createJSONObject();
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0]
 
+// Booleans
 external void setBool( JSONObject& object, string key, bool boolean);
 	#pragma linkname "set_bool"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
@@ -25,6 +26,20 @@ external void setFalse( JSONObject& object, string key);
 	#pragma linkname "set_false"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2]
+
+// Numbers
+external void setInt( JSONObject& object, string key, int value);
+	#pragma linkname "set_int"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2, 3]
+external void setFloat( JSONObject& object, string key, float value);
+	#pragma linkname "set_float"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2, 3]
+external void setDouble( JSONObject& object, string key, double value);
+	#pragma linkname "set_double"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2, 3]
 
 external void serializeJSONObject( JSONObject& object);
 	#pragma effect TheTerminal
