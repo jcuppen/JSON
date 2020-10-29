@@ -1,9 +1,0 @@
-use StdIO: all;
-use JSON: all;
-
-int main()
-{
-	json_object = createJSONObject();
-	serializeJSONObject(json_object);
-	return 0;
-}
