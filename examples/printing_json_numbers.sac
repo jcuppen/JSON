@@ -10,13 +10,3 @@ int main()
 	serializeJSONObject(json_object);
 	return 0;
 }
-
-// float getFloat()
-// {
-// 	return 1.2f;
-// }
-
-// double getDouble()
-// {
-// 	return 3.4;
-// }
