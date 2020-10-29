@@ -43,6 +43,14 @@ void set_double( cJSON * object, char * key, double value)
 	cJSON_AddItemToObject(object, key, val);
 }
 
+// String
+void set_string( cJSON * object, char * key, char * value)
+{
+	cJSON * val;
+	val = cJSON_CreateString(value);
+	cJSON_AddItemToObject(object, key, val);
+}
+
 void serialize_object( cJSON* object)
 {
 	char * str;
