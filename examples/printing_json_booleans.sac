@@ -1,0 +1,13 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_object = createJSONObject();
+	setBool(json_object, "isTrue", true);
+	setBool(json_object, "isFalse", false);
+	setTrue(json_object, "isAlsoTrue");
+	setFalse(json_object, "isAlsoFalse");
+	serializeJSONObject(json_object);
+	return 0;
+}
