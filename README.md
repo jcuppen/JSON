@@ -5,6 +5,9 @@ This is a Sac module that wraps around some of the [cJSON](https://github.com/Da
 ## Supported Functionality
 - Creating of empty json object.
 - Adding booleans to json objects.
+- Adding integers to json objects.
+- Adding floats to json objects.
+- Adding doubles to json objects.
 - Serializing json objects to stdout.
 
 ## Build Instructions

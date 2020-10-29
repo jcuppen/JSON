@@ -25,3 +25,15 @@ expected result:
 	"isAlsoFalse":	false
 }
 ```
+
+### `printing_json_numbers.sac`
+Creates a json object and sets numbers in various ways (int, float, double).
+Then outputs the json object to stdout.
+expected result:
+```json
+{
+	"integer":	42,
+	"float":	1.2000000476837158,
+	"double":	3.4
+}
+```
