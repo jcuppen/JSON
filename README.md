@@ -8,6 +8,7 @@ This is a Sac module that wraps around some of the [cJSON](https://github.com/Da
 - Adding integers to json objects.
 - Adding floats to json objects.
 - Adding doubles to json objects.
+- Adding strings to json objects.
 - Serializing json objects to stdout.
 
 ## Build Instructions

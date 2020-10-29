@@ -41,6 +41,12 @@ external void setDouble( JSONObject& object, string key, double value);
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
 
+// String
+external void setString( JSONObject& object, string key, string value);
+	#pragma linkname "set_string"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2, 3]
+
 external void serializeJSONObject( JSONObject& object);
 	#pragma effect TheTerminal
 	#pragma linkname "serialize_object"

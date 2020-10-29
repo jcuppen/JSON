@@ -37,3 +37,13 @@ expected result:
 	"double":	3.4
 }
 ```
+
+### `printing_json_string.sac`
+Creates a json object and sets a string.
+Then outputs the json object to stdout.
+expected result:
+```json
+{
+	"aString":	"Hello World!"
+}
+```
