@@ -6,6 +6,10 @@ cJSON * create_object()
 {
 	return cJSON_CreateObject();
 }
+cJSON * create_array()
+{
+	return cJSON_CreateArray();
+}
 
 // Booleans
 void set_bool( cJSON * object, char * key, bool boolean)
@@ -43,6 +47,62 @@ void set_string( cJSON * object, char * key, char * value)
 	cJSON_AddStringToObject(object, key, value);
 }
 
+// Arrays
+void set_array( cJSON * object, char * key, cJSON * array)
+{
+	cJSON_AddItemToObject(object, key, array);
+}
+void set_array_ref( cJSON * object, char * key, cJSON * array)
+{
+	cJSON_AddItemReferenceToObject(object, key, array);
+}
+void set_empty_array( cJSON * object, char * array_key)
+{
+	cJSON * arr;
+	arr = cJSON_CreateArray();
+	cJSON_AddArrayToObject(object, array_key);
+}
+cJSON * set_empty_array_alt( cJSON * object, char * array_key)
+{
+	cJSON * arr;
+	arr = cJSON_CreateArray();
+	cJSON_AddArrayToObject(object, array_key);
+	return arr;
+}
+cJSON * create_empty_array_in_object( cJSON * object, char * key)
+{
+	return cJSON_AddArrayToObject(object, key);
+}
+
+// Array manipulation
+void add_to_array( cJSON * array, cJSON * item)
+{
+	bool b = cJSON_AddItemToArray(array, item);
+	if (b)
+	{
+		printf("good\n");
+	} else {
+		printf("Bad\n");
+	}
+}
+void add_to_array_ref( cJSON * array, cJSON * item)
+{
+	cJSON_AddItemReferenceToArray(array, item);
+}
+void add_int_to_array( cJSON * array, int item)
+{
+	cJSON * val;
+	val = cJSON_CreateNumber(item);
+	add_to_array(array, item);
+}
+void add_int_to_array_ref( cJSON * array, int item)
+{
+	cJSON * val;
+	val = cJSON_CreateNumber(item);
+	add_to_array_ref(array, item);
+}
+
+// Serialization
 void serialize_object( cJSON* object)
 {
 	char * str;
