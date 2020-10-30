@@ -26,29 +26,21 @@ void set_false( cJSON * object, char * key)
 // Numbers
 void set_int( cJSON * object, char * key, int value)
 {
-	cJSON * val;
-	val = cJSON_CreateNumber(value);
-	cJSON_AddItemToObject(object, key, val);
+	cJSON_AddNumberToObject(object, key, value);
 }
 void set_float( cJSON * object, char * key, float value)
 {
-	cJSON * val;
-	val = cJSON_CreateNumber((double)value);
-	cJSON_AddItemToObject(object, key, val);
+	cJSON_AddNumberToObject(object, key, (double)value);
 }
 void set_double( cJSON * object, char * key, double value)
 {
-	cJSON * val;
-	val = cJSON_CreateNumber(value);
-	cJSON_AddItemToObject(object, key, val);
+	cJSON_AddNumberToObject(object, key, value);
 }
 
 // String
 void set_string( cJSON * object, char * key, char * value)
 {
-	cJSON * val;
-	val = cJSON_CreateString(value);
-	cJSON_AddItemToObject(object, key, val);
+	cJSON_AddStringToObject(object, key, value);
 }
 
 void serialize_object( cJSON* object)

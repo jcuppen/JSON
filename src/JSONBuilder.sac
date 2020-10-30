@@ -10,6 +10,10 @@ external JSONObject createJSONObject();
 	#pragma linkname "create_object"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0]
+external JSONObject createJSONArray();
+	#pragma linkname "create_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [0]
 
 // Booleans
 external void setBool( JSONObject& object, string key, bool boolean);

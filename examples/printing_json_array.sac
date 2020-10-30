@@ -1,0 +1,10 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_object = createJSONObject();
+	setEmptyArray(json_object, "aString");
+	serializeJSONObject(json_object);
+	return 0;
+}
