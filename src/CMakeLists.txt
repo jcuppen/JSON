@@ -5,19 +5,19 @@ INCLUDE ("${CMAKE_SOURCE_DIR}/cmake-common/resolve-sac2c-dependencies.cmake")
 # C files relatively to this CMakeLists.txt.
 SET (C_DEPS_SRC
   src/JSONBuilder/json_builder.c
-  src/JSONObject/delete_json_object.c
+  src/JSONObject/json_object.c
 )
 
 # SaC files relatively to this CMakeLists.txt.
 SET (SAC_SRC
   JSONBuilder.sac
   JSONObject.sac
+  JSONInnerObject.sac
   JSON.sac
 )
 
 # For every C source, compile an object file maintaining the right location
 # in the binary dir so that sac files can pick it up.
-
 FOREACH (name ${C_DEPS_SRC})
   SET (src "${CMAKE_CURRENT_SOURCE_DIR}/${name}")
   GET_FILENAME_COMPONENT (dir ${name} DIRECTORY)

@@ -56,19 +56,6 @@ void set_array_ref( cJSON * object, char * key, cJSON * array)
 {
 	cJSON_AddItemReferenceToObject(object, key, array);
 }
-void set_empty_array( cJSON * object, char * array_key)
-{
-	cJSON * arr;
-	arr = cJSON_CreateArray();
-	cJSON_AddArrayToObject(object, array_key);
-}
-cJSON * set_empty_array_alt( cJSON * object, char * array_key)
-{
-	cJSON * arr;
-	arr = cJSON_CreateArray();
-	cJSON_AddArrayToObject(object, array_key);
-	return arr;
-}
 cJSON * create_empty_array_in_object( cJSON * object, char * key)
 {
 	return cJSON_AddArrayToObject(object, key);
@@ -77,13 +64,7 @@ cJSON * create_empty_array_in_object( cJSON * object, char * key)
 // Array manipulation
 void add_to_array( cJSON * array, cJSON * item)
 {
-	bool b = cJSON_AddItemToArray(array, item);
-	if (b)
-	{
-		printf("good\n");
-	} else {
-		printf("Bad\n");
-	}
+	cJSON_AddItemToArray(array, item);
 }
 void add_to_array_ref( cJSON * array, cJSON * item)
 {

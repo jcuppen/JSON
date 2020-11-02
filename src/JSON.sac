@@ -2,5 +2,6 @@ module JSON;
 
 import JSONBuilder: all;
 import JSONObject: all;
+import JSONInnerObject: all;
 
 export all;

@@ -4,12 +4,20 @@ use JSON: all;
 // // create obj
 // // create arr
 // // setArray = addItemToObject
-// // SegFault!
+// // empty array = works!
+// // filled array noRef before add = segfault!
+// // filled array Ref before add = segfault!
+// // filled array noRef after add = does nothing!
+// // filled array Ref after add = does nothing!
 // int main()
 // {
 // 	json_object = createJSONObject();
 // 	json_array = createJSONArray();
+// 	// addIntToArrayRef(json_array, 7);
+// 	// addIntToArray(json_array, 7);
 // 	setArray(json_object, "myArr0", json_array);
+// 	// addIntToArray(json_array, 3);
+// 	// addIntToArrayRef(json_array, 4);
 // 	serializeJSONObject(json_object);
 // 	return 0;
 // }
@@ -19,8 +27,10 @@ use JSON: all;
 // // setArrayRef = addItemReferenceToObject
 // // addIntToArray = addItemReferenceToObject
 // // empty array: Works!
-// // filled array ref: SegFault!
-// // filled array noRef: SegFault!
+// // filled array ref before: SegFault!
+// // filled array noRef before : SegFault!
+// // filled array Ref after : does nothing!
+// // filled array noRef after : does nothing!
 // int main()
 // {
 // 	json_object = createJSONObject();
@@ -28,49 +38,23 @@ use JSON: all;
 // 	// addIntToArrayRef(json_array, 4);
 // 	// addIntToArray(json_array, 3);
 // 	setArrayRef(json_object, "myArr1", json_array);
-// 	serializeJSONObject(json_object);
-// 	return 0;
-// }
-
-// // create obj
-// // setEmptyArray = create arr, AddArrayToObject
-// // empty array: Works!
-// // filled array ref: Impossible!
-// // filled array noRef: Impossible!
-// int main()
-// {
-// 	json_object = createJSONObject();
 // 	// addIntToArrayRef(json_array, 4);
 // 	// addIntToArray(json_array, 3);
-// 	setEmptyArray(json_object, "myArr2");
 // 	serializeJSONObject(json_object);
 // 	return 0;
 // }
 
 // // create obj
 // // createEmptyArrayInObject = create arr, AddArrayToObject, return array
-// // SegFault!
+// // empty array = works!
+// // filled array ref = No effect!
+// // filled array noref = No effect!
 // int main()
 // {
 // 	json_object = createJSONObject();
 // 	json_array = createEmptyArrayInObject(json_object, "myArr3");
-// 	serializeJSONObject(json_object);
-// 	return 0;
-// }
-
-// // create obj
-// // setEmptyArrayAlt = create arr, AddArrayToObject, return arr
-// // empty array: Works!
-// // filled array ref: No effect!
-// // filled array noRef: no Effect!
-// int main()
-// {
-// 	json_object = createJSONObject();
-	
-// 	json_array = setEmptyArrayAlt(json_object, "myArr4");
 // 	// addIntToArrayRef(json_array, 4);
 // 	// addIntToArray(json_array, 3);
-
 // 	serializeJSONObject(json_object);
 // 	return 0;
 // }
@@ -83,7 +67,7 @@ use JSON: all;
 // 	json_object = createJSONObject();
 // 	json_object_1 = createJSONObject();
 	
-// 	setEmptyArray(json_object, "myArr5");
+// 	t = createEmptyArrayInObject(json_object, "myArr5");
 
 // 	serializeJSONObject(json_object);
 // 	serializeJSONObject(json_object_1);
