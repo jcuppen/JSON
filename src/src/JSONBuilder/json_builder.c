@@ -1,6 +1,7 @@
 #include <cjson/cJSON.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 cJSON * create_object()
 {
@@ -48,9 +49,13 @@ void set_string( cJSON * object, char * key, char * value)
 }
 
 // Arrays
-void set_array( cJSON * object, char * key, cJSON * array)
+cJSON * set_array( cJSON * object, char * key, cJSON * array)
 {
-	cJSON_AddItemToObject(object, key, array);
+        char *local;
+        local = malloc( strlen( key) +1);
+        local = strcpy( local, key);
+	cJSON_AddItemToObject(object, local, array);
+        return array;
 }
 void set_array_ref( cJSON * object, char * key, cJSON * array)
 {
@@ -74,13 +79,14 @@ void add_int_to_array( cJSON * array, int item)
 {
 	cJSON * val;
 	val = cJSON_CreateNumber(item);
-	add_to_array(array, item);
+	add_to_array(array, val);
 }
-void add_int_to_array_ref( cJSON * array, int item)
+cJSON * add_int_to_array_ref( cJSON * array, int item)
 {
 	cJSON * val;
 	val = cJSON_CreateNumber(item);
-	add_to_array_ref(array, item);
+	add_to_array_ref(array, val);
+        return val;
 }
 
 // Serialization

@@ -31,18 +31,25 @@ use JSON: all;
 // // filled array noRef before : SegFault!
 // // filled array Ref after : does nothing!
 // // filled array noRef after : does nothing!
-// int main()
-// {
-// 	json_object = createJSONObject();
-// 	json_array = createJSONArray();
-// 	// addIntToArrayRef(json_array, 4);
-// 	// addIntToArray(json_array, 3);
-// 	setArrayRef(json_object, "myArr1", json_array);
-// 	// addIntToArrayRef(json_array, 4);
-// 	// addIntToArray(json_array, 3);
-// 	serializeJSONObject(json_object);
-// 	return 0;
-// }
+int main()
+{
+	json_object = createJSONObject();
+	json_array = createJSONArray();
+	// four = addIntToArrayRef(json_array, 4);
+	// three = addIntToArrayRef(json_array, 3);
+	addIntToArray(json_array, 4);
+	addIntToArray(json_array, 3);
+	addIntToArray(json_array, 42);
+	// json_array = setArray(json_object, "myArr1", json_array);
+	setArrayRef(json_object, "myArr1", json_array);
+	// json_array = setArray(json_object, "myArr1", json_array);
+	// four = addIntToArrayRef(json_array, 4);
+	// addIntToArray(json_array, 3);
+
+	serializeJSONObject(json_object);
+	serializeJSONObject(json_array);
+	return 0;
+}
 
 // // create obj
 // // createEmptyArrayInObject = create arr, AddArrayToObject, return array
