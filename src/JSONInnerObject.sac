@@ -1,7 +1,0 @@
-class JSONInnerObject;
-
-external classtype;
-	#pragma freefun "delete_json_inner_object"
-	#pragma linkobj "src/JSONObject/json_object.o"
-
-export all;
