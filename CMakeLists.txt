@@ -24,19 +24,19 @@ SET (SAC2C_EXTRA_INC "-I${CJSON_INCLUDE_DIR}" CACHE STRING "Extra include files 
 
 # if building generically, we need to make sure sac2c supports this
 IF (BUILDGENERIC)
-    CHECK_SAC2C_SUPPORT_FLAG ("generic" "-generic")
-    IF (HAVE_FLAG_generic)
-        LIST (APPEND SAC2C_CPP_INC "-generic")
-        MESSAGE (STATUS "Building with *no* system-specific optimisations.")
-    ELSE ()
-        MESSAGE (STATUS "Generic-build disabled as sac2c does not support this!")
-        SET (BUILDGENERIC OFF)
-    ENDIF ()
+	CHECK_SAC2C_SUPPORT_FLAG ("generic" "-generic")
+	IF (HAVE_FLAG_generic)
+		LIST (APPEND SAC2C_CPP_INC "-generic")
+		MESSAGE (STATUS "Building with *no* system-specific optimisations.")
+	ELSE ()
+		MESSAGE (STATUS "Generic-build disabled as sac2c does not support this!")
+		SET (BUILDGENERIC OFF)
+	ENDIF ()
 ENDIF ()
 
 # For every target run CMakeLists.txt in src
 FOREACH (TARGET IN ITEMS ${TARGETS})
-  	ADD_SUBDIRECTORY (src src-${TARGET})
+	ADD_SUBDIRECTORY (src src-${TARGET})
 ENDFOREACH ()
 
 # This build target is responsible for generating the package sac2crc file

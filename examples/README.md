@@ -47,3 +47,28 @@ expected result:
 	"aString":	"Hello World!"
 }
 ```
+
+### `printing_json_array.sac`
+Creates a json object.
+Then a json array that is filled with booleans.
+Then a json array that is filled with various types of numbers.
+Then a json array that is filled with strings.
+All arrays are then added and the json object is printed.
+Then the focus is shifted to the array containing numbers, and said array is printed.
+Another number is added after insertion to show this is possible.
+Finally we shift focus back to the root object and print that., then an array and sets a string.
+
+expected result:
+```json
+{
+	"myNumberArr":	[4, 3.7999999523162842, 42.22],
+	"myBoolArr":	[true, false, true, false],
+	"myStringArr":	["Hello", "World"]
+}
+[4, 3.7999999523162842, 42.22, 42]
+{
+	"myNumberArr":	[4, 3.7999999523162842, 42.22, 42],
+	"myBoolArr":	[true, false, true, false],
+	"myStringArr":	["Hello", "World"]
+}
+```

@@ -2,12 +2,20 @@ module JSONBuilder;
 
 use JSONObject: all;
 use String: {string};
+use World: {TheWorld};
 use Terminal: {TheTerminal};
 
 export all;
 
+// Creation
 external JSONObject createJSONObject();
+	#pragma effect TheWorld
 	#pragma linkname "create_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [0]
+external JSONObject createJSONArray();
+	#pragma effect TheWorld
+	#pragma linkname "create_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0]
 
@@ -16,12 +24,10 @@ external void setBool( JSONObject& object, string key, bool boolean);
 	#pragma linkname "set_bool"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
-
 external void setTrue( JSONObject& object, string key);
 	#pragma linkname "set_true"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2]
-
 external void setFalse( JSONObject& object, string key);
 	#pragma linkname "set_false"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
@@ -47,6 +53,59 @@ external void setString( JSONObject& object, string key, string value);
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
 
+// Arrays
+external void insertArray( JSONObject& object, string key, JSONObject array);
+	#pragma linkname "insert_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2, 3]
+	#pragma refcounting [0,2]
+
+// Array manipulation
+//// Booleans
+external void addBooleanToArray( JSONObject& array, bool boolean);
+	#pragma linkname "add_bool_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+external void addTrueToArray( JSONObject& array);
+	#pragma linkname "add_true_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1]
+external void addFalseToArray( JSONObject& array);
+	#pragma linkname "add_false_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1]
+//// Numbers
+external void addIntToArray( JSONObject& array, int number);
+	#pragma linkname "add_int_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+external void addFloatToArray( JSONObject& array, float number);
+	#pragma linkname "add_float_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+external void addDoubleToArray( JSONObject& array, double number);
+	#pragma linkname "add_double_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+//// String
+external void addStringToArray( JSONObject& array, string value);
+	#pragma linkname "add_string_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+
+// JSON object traversal
+external JSONObject changeFocusToChild( JSONObject object, string key);
+	#pragma linkname "change_focus"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1,2,3]
+	#pragma refcounting [0,1]
+external JSONObject changeFocusToRoot( JSONObject object);
+	#pragma linkname "focus_root"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1,2]
+	#pragma refcounting [0,1]
+
+// Input Output
 external void serializeJSONObject( JSONObject& object);
 	#pragma effect TheTerminal
 	#pragma linkname "serialize_object"
