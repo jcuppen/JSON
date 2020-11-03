@@ -1,7 +1,7 @@
 #include <cjson/cJSON.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
+#include "../include/utils.h"
 #include "sac.h"
 #include "../include/sac_cjson.h"
 
@@ -64,8 +64,7 @@ void insert_array( SAC_cJSON ** object, SAC_array_descriptor_t * object_descript
 					char * key, SAC_cJSON * array, SAC_array_descriptor_t array_descriptor)
 {
 	char * local;
-	local = SAC_MALLOC( strlen( key) + 1);
-	local = strcpy( local, key);
+	local = copyString( key);
 	if( array->head != array->root)
 	{
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
@@ -90,11 +89,10 @@ void add_int_to_array( SAC_cJSON * array, int number)
 void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 					SAC_cJSON * in, SAC_array_descriptor_t in_descriptor, char * key)
 {
-	char * local;
 	cJSON * result;
+	char * local;
 
-	local = SAC_MALLOC( strlen( key) + 1);
-	local = strcpy( local, key);
+	local = copyString( key);
 	result = cJSON_GetObjectItemCaseSensitive( in->head, local);
 	if ( result == NULL)
 	{
