@@ -12,7 +12,6 @@ SET (C_DEPS_SRC
 SET (SAC_SRC
   JSONBuilder.sac
   JSONObject.sac
-  JSONInnerObject.sac
   JSON.sac
 )
 

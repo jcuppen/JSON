@@ -1,36 +1,6 @@
 use StdIO: all;
 use JSON: all;
 
-// // create obj
-// // create arr
-// // setArray = addItemToObject
-// // empty array = works!
-// // filled array noRef before add = segfault!
-// // filled array Ref before add = segfault!
-// // filled array noRef after add = does nothing!
-// // filled array Ref after add = does nothing!
-// int main()
-// {
-// 	json_object = createJSONObject();
-// 	json_array = createJSONArray();
-// 	// addIntToArrayRef(json_array, 7);
-// 	// addIntToArray(json_array, 7);
-// 	setArray(json_object, "myArr0", json_array);
-// 	// addIntToArray(json_array, 3);
-// 	// addIntToArrayRef(json_array, 4);
-// 	serializeJSONObject(json_object);
-// 	return 0;
-// }
-
-// // create obj
-// // create arr
-// // setArrayRef = addItemReferenceToObject
-// // addIntToArray = addItemReferenceToObject
-// // empty array: Works!
-// // filled array ref before: SegFault!
-// // filled array noRef before : SegFault!
-// // filled array Ref after : does nothing!
-// // filled array noRef after : does nothing!
 int main()
 {
 	json_object = createJSONObject();
@@ -40,44 +10,14 @@ int main()
 	addIntToArray(json_array, 4);
 	addIntToArray(json_array, 3);
 	addIntToArray(json_array, 42);
-	// json_array = setArray(json_object, "myArr1", json_array);
-	setArrayRef(json_object, "myArr1", json_array);
+	insertArray(json_object, "myArr1", json_array);
+	// setArrayRef(json_object, "myArr1", json_array);
 	// json_array = setArray(json_object, "myArr1", json_array);
 	// four = addIntToArrayRef(json_array, 4);
 	// addIntToArray(json_array, 3);
 
 	serializeJSONObject(json_object);
-	serializeJSONObject(json_array);
+	//serializeJSONObject(json_array);
 	return 0;
 }
-
-// // create obj
-// // createEmptyArrayInObject = create arr, AddArrayToObject, return array
-// // empty array = works!
-// // filled array ref = No effect!
-// // filled array noref = No effect!
-// int main()
-// {
-// 	json_object = createJSONObject();
-// 	json_array = createEmptyArrayInObject(json_object, "myArr3");
-// 	// addIntToArrayRef(json_array, 4);
-// 	// addIntToArray(json_array, 3);
-// 	serializeJSONObject(json_object);
-// 	return 0;
-// }
-
-// // create obj and obj1
-// // add arr to obj
-// // arr is in both???
-// int main()
-// {
-// 	json_object = createJSONObject();
-// 	json_object_1 = createJSONObject();
-	
-// 	t = createEmptyArrayInObject(json_object, "myArr5");
-
-// 	serializeJSONObject(json_object);
-// 	serializeJSONObject(json_object_1);
-// 	return 0;
-// }
 

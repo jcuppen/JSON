@@ -1,7 +1,6 @@
 module JSONBuilder;
 
 use JSONObject: all;
-use JSONInnerObject: all;
 use String: {string};
 use Terminal: {TheTerminal};
 
@@ -15,6 +14,8 @@ external JSONObject createJSONArray();
 	#pragma linkname "create_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0]
+
+#if 0
 
 // Booleans
 external void setBool( JSONObject& object, string key, bool boolean);
@@ -51,12 +52,16 @@ external void setString( JSONObject& object, string key, string value);
 	#pragma linkname "set_string"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
+#endif
 
 // Arrays
-external JSONInnerObject setArray( JSONObject& object, string key, JSONObject array);
-	#pragma linkname "set_array"
+external void insertArray( JSONObject& object, string key, JSONObject array);
+	#pragma linkname "insert_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
-	#pragma linksign [0, 1, 2, 3]
+	#pragma linksign [1, 2, 3]
+        #pragma refcounting [0,2]
+
+#if 0
 external void setArrayRef( JSONObject& object, string key, JSONObject& array);
 	#pragma linkname "set_array_ref"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
@@ -66,16 +71,15 @@ external JSONInnerObject createEmptyArrayInObject( JSONObject& object, string ke
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0, 1, 2]
 
+#endif
+
 // Array manipulation
 external void addIntToArray( JSONObject& array, int item);
 	#pragma linkname "add_int_to_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2]
 
-external void addIntToArray( JSONInnerObject& array, int item);
-	#pragma linkname "add_int_to_array"
-	#pragma linkobj "src/JSONBuilder/json_builder.o"
-	#pragma linksign [1, 2]
+#if 0
 
 external JSONObject addIntToArrayRef( JSONObject& array, int item);
 	#pragma linkname "add_int_to_array_ref"
@@ -87,14 +91,12 @@ external JSONObject addIntToArrayRef( JSONInnerObject& array, int item);
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0, 1, 2]
 
+#endif
+
 external void serializeJSONObject( JSONObject& object);
 	#pragma effect TheTerminal
 	#pragma linkname "serialize_object"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1]
 
-external void serializeJSONInnerObject( JSONInnerObject& object);
-	#pragma effect TheTerminal
-	#pragma linkname "serialize_object"
-	#pragma linkobj "src/JSONBuilder/json_builder.o"
-	#pragma linksign [1]
+

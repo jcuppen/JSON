@@ -1,11 +1,11 @@
 #include <cjson/cJSON.h>
+#include "sac.h"
+#include "../include/sac-cjson.h"
 
-void delete_json_object( cJSON * object)
+
+void delete_json_object( SAC_cJSON * object)
 {
-	cJSON_Delete( object);
+	cJSON_Delete( object->root);
+        SAC_FREE( object);
 }
 
-void delete_json_inner_object( cJSON * object)
-{
-	// do nothing, cJSON will take care of this when deleting its parent object
-}
