@@ -5,22 +5,36 @@ int main()
 {
 	json_object = createJSONObject();
 	json_array = createJSONArray();
-	addIntToArray(json_array, 4);
-	addIntToArray(json_array, 3);
-	addIntToArray(json_array, 42);
-	insertArray(json_object, "myArr1", json_array);
+	addIntToArray( json_array, 4);
+	addFloatToArray( json_array, 3.8f);
+	addDoubleToArray( json_array, 42.22);
 
 	json_array2 = createJSONArray();
-	addIntToArray(json_array2, 2);
-	addIntToArray(json_array2, 3);
+	addBooleanToArray( json_array2, true);
+	addBooleanToArray( json_array2, false);
+	addTrueToArray( json_array2);
+	addFalseToArray( json_array2);
 
-	insertArray(json_object, "myArr2", json_array2);
+	json_array3 = createJSONArray();
+	addStringToArray( json_array3, "Hello");
+	addStringToArray( json_array3, "World");
 
-	serializeJSONObject(json_object);
+	insertArray( json_object, "myNumberArr", json_array);
+	insertArray( json_object, "myBoolArr", json_array2);
+	insertArray( json_object, "myStringArr", json_array3);
 
-	json_array = changeFocusToChild(json_object, "myArr1");
+	serializeJSONObject( json_object);
 
-	serializeJSONObject(json_array);
+	number_array = changeFocusToChild(json_object, "myNumberArr");
+
+	addIntToArray( number_array, 42);
+
+	serializeJSONObject( number_array);
+
+	original_object = changeFocusToRoot( number_array);
+
+	serializeJSONObject( original_object);
 
 	return 0;
 }
+

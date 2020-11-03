@@ -23,12 +23,17 @@ SAC_cJSON * create_array()
 	return make_sac_cjson_object( cJSON_CreateArray());
 }
 
+void set_item( cJSON * object, char * key, cJSON * value)
+{
+	cJSON_AddItemToObject( object, key, value);
+}
+
 // Booleans
 void set_bool( cJSON * object, char * key, bool boolean)
 {
 	cJSON * value;
-	value = boolean ? cJSON_CreateTrue() : cJSON_CreateFalse();
-	cJSON_AddItemToObject( object, key, value);
+	value = cJSON_CreateBool( boolean);
+	set_item( object, key, value);
 }
 void set_true( cJSON * object, char * key)
 {
@@ -78,10 +83,45 @@ void add_to_array( cJSON * array, cJSON * item)
 {
 	cJSON_AddItemToArray( array, item);
 }
+//// Booleans
+void add_bool_to_array( SAC_cJSON * array, bool boolean)
+{
+	cJSON * value;
+	value = cJSON_CreateBool( boolean);
+	add_to_array( array->head, value);
+}
+void add_true_to_array( SAC_cJSON * array)
+{
+	add_bool_to_array(array, true);
+}
+void add_false_to_array( SAC_cJSON * array)
+{
+	add_bool_to_array(array, false);
+}
+//// Numbers
 void add_int_to_array( SAC_cJSON * array, int number)
 {
 	cJSON * value;
 	value = cJSON_CreateNumber( number);
+	add_to_array( array->head, value);
+}
+void add_double_to_array( SAC_cJSON * array, double number)
+{
+	cJSON * value;
+	value = cJSON_CreateNumber( number);
+	add_to_array( array->head, value);
+}
+void add_float_to_array( SAC_cJSON * array, float number)
+{
+	cJSON * value;
+	value = cJSON_CreateNumber( (double)number);
+	add_to_array( array->head, value);
+}
+//// String
+void add_string_to_array( SAC_cJSON * array, char * string)
+{
+	cJSON * value;
+	value = cJSON_CreateString( string);
 	add_to_array( array->head, value);
 }
 
@@ -100,6 +140,13 @@ void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 	}
 	*out = in;
 	(*out)->head = result;
+	*out_descriptor = in_descriptor;
+}
+void focus_root( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
+					SAC_cJSON * in, SAC_array_descriptor_t in_descriptor)
+{
+	*out = in;
+	(*out)->head = (*out)->root;
 	*out_descriptor = in_descriptor;
 }
 
