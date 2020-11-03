@@ -69,7 +69,7 @@ void insert_array( SAC_cJSON ** object, SAC_array_descriptor_t * object_descript
 					char * key, SAC_cJSON * array, SAC_array_descriptor_t array_descriptor)
 {
 	char * local;
-	local = copyString( key);
+	local = copy_string( key);
 	if( array->head != array->root)
 	{
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
@@ -83,7 +83,7 @@ void insert_object( SAC_cJSON ** object, SAC_array_descriptor_t * object_descrip
 					SAC_cJSON * inner_object, SAC_array_descriptor_t inner_object_descriptor)
 {
 	char * local;
-	local = copyString( key);
+	local = copy_string( key);
 	if( inner_object->head != inner_object->root)
 	{
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
@@ -146,7 +146,7 @@ void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 	cJSON * result;
 	char * local;
 
-	local = copyString( key);
+	local = copy_string( key);
 	result = cJSON_GetObjectItemCaseSensitive( in->head, local);
 	if ( result == NULL)
 	{
