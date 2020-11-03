@@ -1,7 +1,8 @@
 #include <cjson/cJSON.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include "../include/utils.h"
+// #include "../include/utils.h"
+#include <string.h>
 #include "sac.h"
 #include "../include/sac_cjson.h"
 
@@ -22,6 +23,15 @@ SAC_cJSON * create_array()
 {
 	return make_sac_cjson_object( cJSON_CreateArray());
 }
+
+static char * copy_string(char * source)
+{
+	char * destination;
+	destination = SAC_MALLOC( strlen( source) + 1);
+	destination = strcpy( destination, source);
+	return destination;
+}
+
 
 void set_item( cJSON * object, char * key, cJSON * value)
 {
