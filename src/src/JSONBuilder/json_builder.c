@@ -25,7 +25,7 @@ SAC_cJSON * create_array()
 
 void set_item( cJSON * object, char * key, cJSON * value)
 {
-	cJSON_AddItemToObject( object, key, value);
+	cJSON_AddItemToObject( object, copy_string(key), value);
 }
 
 // Booleans
@@ -76,6 +76,20 @@ void insert_array( SAC_cJSON ** object, SAC_array_descriptor_t * object_descript
 	}
 	cJSON_AddItemToObject( (*object)->head, local, array->head);
 	SAC_FREE( array_descriptor);
+}
+
+// Objects
+void insert_object( SAC_cJSON ** object, SAC_array_descriptor_t * object_descriptor, char * key,
+					SAC_cJSON * inner_object, SAC_array_descriptor_t inner_object_descriptor)
+{
+	char * local;
+	local = copyString( key);
+	if( inner_object->head != inner_object->root)
+	{
+		SAC_RuntimeError( "Trying to insert non-root JSON object!");
+	}
+	cJSON_AddItemToObject( (*object)->head, local, inner_object->head);
+	SAC_FREE( inner_object_descriptor);
 }
 
 // Array manipulation
