@@ -69,7 +69,7 @@ external void insertObject( JSONObject& object, string key, JSONObject innerObje
 
 // Array manipulation
 //// Booleans
-external void addBooleanToArray( JSONObject& array, bool boolean);
+external void addBoolToArray( JSONObject& array, bool boolean);
 	#pragma linkname "add_bool_to_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2]
