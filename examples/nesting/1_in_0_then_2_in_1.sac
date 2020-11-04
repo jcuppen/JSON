@@ -1,0 +1,23 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	level_0_object = createJSONObject();
+	level_1_object = createJSONObject();
+
+	insertObject( level_0_object, "lvl_1", level_1_object);
+
+	lv1 = changeFocusToChild( level_0_object, "lvl_1");
+
+	level_2_object = createJSONObject();
+	setString( level_2_object, "msg", "first: 1 in 0, then 2 in 1");
+
+	insertObject( lv1, "lvl_2", level_2_object);
+
+	root = changeFocusToRoot(lv1);
+
+	serializeJSONObject( root);
+
+	return 0;
+}

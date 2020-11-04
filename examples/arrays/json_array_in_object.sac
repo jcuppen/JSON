@@ -1,0 +1,18 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_object = createJSONObject();
+	json_array = createJSONArray();
+	addIntToArray( json_array, 4);
+	addFloatToArray( json_array, 3.8f);
+	addDoubleToArray( json_array, 42.22);
+
+	insertArray( json_object, "myNumberArr", json_array);
+
+	serializeJSONObject( json_object);
+
+	return 0;
+}
+
