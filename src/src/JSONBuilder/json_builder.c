@@ -1,7 +1,7 @@
 #include <cjson/cJSON.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include "../include/utils.h"
+#include <string.h>
 #include "sac.h"
 #include "../include/sac_cjson.h"
 
@@ -14,68 +14,75 @@ static SAC_cJSON * make_sac_cjson_object( cJSON * object)
 	result->root = object;
 	return result;
 }
-SAC_cJSON * create_object()
+SAC_cJSON * create_object(void)
 {
 	return make_sac_cjson_object( cJSON_CreateObject());
 }
-SAC_cJSON * create_array()
+SAC_cJSON * create_array(void)
 {
 	return make_sac_cjson_object( cJSON_CreateArray());
 }
 
-void set_item( cJSON * object, char * key, cJSON * value)
+static char * copy_string(char * source)
 {
-	cJSON_AddItemToObject( object, key, value);
+	char * destination;
+	destination = SAC_MALLOC( strlen( source) + 1);
+	destination = strcpy( destination, source);
+	return destination;
+}
+
+
+void set_item( SAC_cJSON * object, char * key, cJSON * value)
+{
+	cJSON_AddItemToObject( object->head, copy_string(key), value);
 }
 
 // Booleans
-void set_bool( cJSON * object, char * key, bool boolean)
+void set_bool( SAC_cJSON * object, char * key, bool boolean)
 {
 	cJSON * value;
 	value = cJSON_CreateBool( boolean);
 	set_item( object, key, value);
 }
-void set_true( cJSON * object, char * key)
+void set_true( SAC_cJSON * object, char * key)
 {
 	set_bool( object, key, true);
 }
-void set_false( cJSON * object, char * key)
+void set_false( SAC_cJSON * object, char * key)
 {
 	set_bool( object, key, false);
 }
 
 // Numbers
-void set_int( cJSON * object, char * key, int value)
+void set_int( SAC_cJSON * object, char * key, int value)
 {
-	cJSON_AddNumberToObject( object, key, value);
+	cJSON_AddNumberToObject( object->head, copy_string( key), value);
 }
-void set_float( cJSON * object, char * key, float value)
+void set_float( SAC_cJSON * object, char * key, float value)
 {
-	cJSON_AddNumberToObject( object, key, (double)value);
+	cJSON_AddNumberToObject( object->head, copy_string( key), (double)value);
 }
-void set_double( cJSON * object, char * key, double value)
+void set_double( SAC_cJSON * object, char * key, double value)
 {
-	cJSON_AddNumberToObject( object, key, value);
+	cJSON_AddNumberToObject( object->head, copy_string( key), value);
 }
 
 // String
-void set_string( cJSON * object, char * key, char * value)
+void set_string( SAC_cJSON * object, char * key, char * value)
 {
-	cJSON_AddStringToObject( object, key, value);
+	cJSON_AddStringToObject( object->head, copy_string( key), value);
 }
 
-// Arrays
-void insert_array( SAC_cJSON ** object, SAC_array_descriptor_t * object_descriptor,
-					char * key, SAC_cJSON * array, SAC_array_descriptor_t array_descriptor)
+// Objects
+void insert_object( SAC_cJSON ** object, SAC_array_descriptor_t * object_descriptor, char * key,
+					SAC_cJSON * inner_object, SAC_array_descriptor_t inner_object_descriptor)
 {
-	char * local;
-	local = copyString( key);
-	if( array->head != array->root)
+	if( inner_object->head != inner_object->root)
 	{
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
 	}
-	cJSON_AddItemToObject( (*object)->head, local, array->head);
-	SAC_FREE( array_descriptor);
+	cJSON_AddItemToObject( (*object)->head, copy_string( key), inner_object->head);
+	SAC_FREE( inner_object_descriptor);
 }
 
 // Array manipulation
@@ -124,6 +131,17 @@ void add_string_to_array( SAC_cJSON * array, char * string)
 	value = cJSON_CreateString( string);
 	add_to_array( array->head, value);
 }
+//// Array & Objects
+void add_object_to_array( SAC_cJSON ** array, SAC_array_descriptor_t * array_descriptor,
+							SAC_cJSON * object, SAC_array_descriptor_t object_descriptor)
+{
+	if( object->head != object->root)
+	{
+		SAC_RuntimeError( "Trying to insert non-root JSON object!");
+	}
+	add_to_array( (*array)->head, object->head);
+	SAC_FREE( object_descriptor);
+}
 
 // JSON traversal
 void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
@@ -132,7 +150,7 @@ void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 	cJSON * result;
 	char * local;
 
-	local = copyString( key);
+	local = copy_string( key);
 	result = cJSON_GetObjectItemCaseSensitive( in->head, local);
 	if ( result == NULL)
 	{
@@ -142,6 +160,7 @@ void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 	(*out)->head = result;
 	*out_descriptor = in_descriptor;
 }
+
 void focus_root( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 					SAC_cJSON * in, SAC_array_descriptor_t in_descriptor)
 {

@@ -55,14 +55,21 @@ external void setString( JSONObject& object, string key, string value);
 
 // Arrays
 external void insertArray( JSONObject& object, string key, JSONObject array);
-	#pragma linkname "insert_array"
+	#pragma linkname "insert_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2, 3]
+	#pragma refcounting [0,2]
+
+// Objects
+external void insertObject( JSONObject& object, string key, JSONObject innerObject);
+	#pragma linkname "insert_object"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
 	#pragma refcounting [0,2]
 
 // Array manipulation
 //// Booleans
-external void addBooleanToArray( JSONObject& array, bool boolean);
+external void addBoolToArray( JSONObject& array, bool boolean);
 	#pragma linkname "add_bool_to_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2]
@@ -92,6 +99,18 @@ external void addStringToArray( JSONObject& array, string value);
 	#pragma linkname "add_string_to_array"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2]
+//// Objects
+external void addObjectToArray( JSONObject& array, JSONObject object);
+	#pragma linkname "add_object_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+	#pragma refcounting [0,1]
+// //// Arrays
+external void addArrayToArray( JSONObject& outer_array, JSONObject inner_array);
+	#pragma linkname "add_object_to_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1, 2]
+	#pragma refcounting [0,1]
 
 // JSON object traversal
 external JSONObject changeFocusToChild( JSONObject object, string key);

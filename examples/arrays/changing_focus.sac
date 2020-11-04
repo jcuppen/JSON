@@ -1,0 +1,26 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_object = createJSONObject();
+	json_array = createJSONArray();
+	addBoolToArray( json_array, true);
+
+	insertArray( json_object, "myBoolArr", json_array);
+
+	serializeJSONObject( json_object);
+
+	bool_array = changeFocusToChild(json_object, "myBoolArr");
+
+	addFalseToArray( bool_array);
+
+	serializeJSONObject( bool_array);
+
+	original_object = changeFocusToRoot( bool_array);
+
+	serializeJSONObject( original_object);
+
+	return 0;
+}
+
