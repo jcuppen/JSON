@@ -42,3 +42,40 @@ expected result:
 	}
 }
 ```
+
+### `nesting_arrays.sac`
+Creates a JSON object `root`
+Creates 4 JSON arrays: `outer_array`, `inner_array1`, `inner_array2` & `inner_array3`.
+The first inner array is filled with the values 1, 2 & 3.
+The second inner array is filled with the values 4, 5 & 6.
+The third inner array is filled with the values 7, 8 & 9.
+These inner arrays are inserted into the outer array.
+This outer array is added to the root object under the key "matrix".
+This root is then printed to stdout.
+
+expected result:
+```json
+{
+	"matrix":	[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+}
+```
+
+### `objects_in_array.sac`
+Creates a JSON array `root`.
+Creates 3 JSON objects: `obj1`, `obj2` & `obj3`.
+Each object gets an int (1,2,3) under respective keys ("one", "two", "three").
+All objects are added to the root array.
+This root is then printed to stdout.
+
+expected result:
+```json
+[
+	{
+		"one":	1
+	}, {
+		"two":	2
+	}, {
+		"three":	3
+	}
+]
+```

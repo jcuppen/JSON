@@ -1,0 +1,22 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	root = createJSONArray();
+	obj1 = createJSONObject();
+	obj2 = createJSONObject();
+	obj3 = createJSONObject();
+
+	setInt( obj1, "one", 1);
+	setInt( obj2, "two", 2);
+	setInt( obj3, "three", 3);
+
+	addObjectToArray( root, obj1);
+	addObjectToArray( root, obj2);
+	addObjectToArray( root, obj3);
+
+	serializeJSONObject( root);
+
+	return 0;
+}

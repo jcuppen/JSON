@@ -1,0 +1,33 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	root = createJSONObject();
+	outer_array = createJSONArray();
+	inner_array1 = createJSONArray();
+	inner_array2 = createJSONArray();
+	inner_array3 = createJSONArray();
+
+	addIntToArray( inner_array1, 1);
+	addIntToArray( inner_array1, 2);
+	addIntToArray( inner_array1, 3);
+
+	addIntToArray( inner_array2, 4);
+	addIntToArray( inner_array2, 5);
+	addIntToArray( inner_array2, 6);
+
+	addIntToArray( inner_array3, 7);
+	addIntToArray( inner_array3, 8);
+	addIntToArray( inner_array3, 9);
+
+	addArrayToArray( outer_array, inner_array1);
+	addArrayToArray( outer_array, inner_array2);
+	addArrayToArray( outer_array, inner_array3);
+
+	insertArray( root, "matrix", outer_array);
+
+	serializeJSONObject( root);
+
+	return 0;
+}

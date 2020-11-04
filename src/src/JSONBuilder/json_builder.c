@@ -73,31 +73,15 @@ void set_string( SAC_cJSON * object, char * key, char * value)
 	cJSON_AddStringToObject( object->head, copy_string( key), value);
 }
 
-// Arrays
-void insert_array( SAC_cJSON ** object, SAC_array_descriptor_t * object_descriptor,
-					char * key, SAC_cJSON * array, SAC_array_descriptor_t array_descriptor)
-{
-	char * local;
-	local = copy_string( key);
-	if( array->head != array->root)
-	{
-		SAC_RuntimeError( "Trying to insert non-root JSON object!");
-	}
-	cJSON_AddItemToObject( (*object)->head, local, array->head);
-	SAC_FREE( array_descriptor);
-}
-
 // Objects
 void insert_object( SAC_cJSON ** object, SAC_array_descriptor_t * object_descriptor, char * key,
 					SAC_cJSON * inner_object, SAC_array_descriptor_t inner_object_descriptor)
 {
-	char * local;
-	local = copy_string( key);
 	if( inner_object->head != inner_object->root)
 	{
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
 	}
-	cJSON_AddItemToObject( (*object)->head, local, inner_object->head);
+	cJSON_AddItemToObject( (*object)->head, copy_string( key), inner_object->head);
 	SAC_FREE( inner_object_descriptor);
 }
 
@@ -147,6 +131,17 @@ void add_string_to_array( SAC_cJSON * array, char * string)
 	value = cJSON_CreateString( string);
 	add_to_array( array->head, value);
 }
+//// Array & Objects
+void add_object_to_array( SAC_cJSON ** array, SAC_array_descriptor_t * array_descriptor,
+							SAC_cJSON * object, SAC_array_descriptor_t object_descriptor)
+{
+	if( object->head != object->root)
+	{
+		SAC_RuntimeError( "Trying to insert non-root JSON object!");
+	}
+	add_to_array( (*array)->head, object->head);
+	SAC_FREE( object_descriptor);
+}
 
 // JSON traversal
 void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
@@ -165,6 +160,7 @@ void change_focus( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 	(*out)->head = result;
 	*out_descriptor = in_descriptor;
 }
+
 void focus_root( SAC_cJSON ** out, SAC_array_descriptor_t * out_descriptor,
 					SAC_cJSON * in, SAC_array_descriptor_t in_descriptor)
 {
