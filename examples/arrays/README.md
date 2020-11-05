@@ -48,3 +48,14 @@ expected result:
 	"myBoolArr":	[true, false]
 }
 ```
+### `element_removal.sac`
+This creates a JSON array `json_array`
+the integers 1,2 and 3 are added to this array.
+Then the array is printed to stdout.
+After that the element at index 1 is removed and the array is printed to stdout again.
+
+expected result:
+```json
+[1, 2, 3]
+[1, 3]
+```

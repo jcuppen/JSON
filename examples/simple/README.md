@@ -6,7 +6,8 @@ sac2c FILENAME.sac
 ```
 ## Files
 ### `empty_json_object.sac`
-Creates an empty json object and outputs it to stdout.
+Creates an empty JSON object and outputs it to stdout.
+
 expected result:
 ```json
 {
@@ -14,8 +15,9 @@ expected result:
 ```
 
 ### `booleans.sac`
-Creates a json object and sets some booleans in various ways.
+Creates a JSON object and sets some booleans in various ways.
 Then outputs the json object to stdout.
+
 expected result:
 ```json
 {
@@ -27,8 +29,9 @@ expected result:
 ```
 
 ### `numbers.sac`
-Creates a json object and sets numbers in various ways (int, float, double).
+Creates a JSON object and sets numbers in various ways (int, float, double).
 Then outputs the json object to stdout.
+
 expected result:
 ```json
 {
@@ -39,11 +42,29 @@ expected result:
 ```
 
 ### `string.sac`
-Creates a json object and sets a string.
-Then outputs the json object to stdout.
+Creates a JSON object and sets a string.
+Then outputs the object to stdout.
+
 expected result:
 ```json
 {
 	"aString":	"Hello World!"
+}
+```
+
+### `element_removal.sac`
+Creates a JSON object and sets two boolean under the key "isTrue" and "isFalse".
+This object is printed to stdout.
+Then the element with the key "isTrue" is removed and the object is printed to stdout.
+
+expected result:
+```json
+{
+	"isTrue":		true,
+	"isFalse":		false
+}
+{
+
+	"isFalse":		false
 }
 ```

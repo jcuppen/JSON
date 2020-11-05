@@ -8,8 +8,8 @@ int main()
 	level_2_object = createJSONObject();
 	setString(level_2_object, "msg", "first: 2 in 1, then 1 in 0");
 
-	insertObject(level_1_object, "lvl_2", level_2_object);
-	insertObject(level_0_object, "lvl_1", level_1_object);
+	setObject(level_1_object, "lvl_2", level_2_object);
+	setObject(level_0_object, "lvl_1", level_1_object);
 
 	serializeJSONObject( level_0_object);
 

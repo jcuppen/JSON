@@ -1,0 +1,14 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_array = createJSONArray();
+	addIntToArray( json_array, 1);
+	addIntToArray( json_array, 2);
+	addIntToArray( json_array, 3);
+	serializeJSONObject(json_array);
+	removeElement( json_array, 1);
+	serializeJSONObject(json_array);
+	return 0;
+}

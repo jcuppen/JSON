@@ -19,6 +19,33 @@ external JSONObject createJSONArray();
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [0]
 
+// Element removal
+external void removeElement( JSONObject& object, string key);
+	#pragma linkname "remove_item_from_object"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1,2]
+external void removeElement( JSONObject& object, int index);
+	#pragma linkname "remove_item_from_array"
+	#pragma linkobj "src/JSONBuilder/json_builder.o"
+	#pragma linksign [1,2]
+
+// Element replacement
+//// Booleans
+// external void replaceWithBool( JSONObject& object, int index, bool boolean);
+// 	#pragma linkname "replace_bool_in_array"
+// 	#pragma linkobj "src/JSONBuilder/json_builder.o"
+// 	#pragma linksign [1,2,3]
+// external void replaceWithTrue( JSONObject& object, int index);
+// 	#pragma linkname "replace_true_in_array"
+// 	#pragma linkobj "src/JSONBuilder/json_builder.o"
+// 	#pragma linksign [1,2]
+// external void replaceWithFalse( JSONObject& object, int index);
+// 	#pragma linkname "replace_false_in_array"
+// 	#pragma linkobj "src/JSONBuilder/json_builder.o"
+// 	#pragma linksign [1,2]
+
+//cJSON_ReplaceItemInObjectCaseSensitive
+
 // Booleans
 external void setBool( JSONObject& object, string key, bool boolean);
 	#pragma linkname "set_bool"
@@ -54,15 +81,15 @@ external void setString( JSONObject& object, string key, string value);
 	#pragma linksign [1, 2, 3]
 
 // Arrays
-external void insertArray( JSONObject& object, string key, JSONObject array);
-	#pragma linkname "insert_object"
+external void setArray( JSONObject& object, string key, JSONObject array);
+	#pragma linkname "set_object"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
 	#pragma refcounting [0,2]
 
 // Objects
-external void insertObject( JSONObject& object, string key, JSONObject innerObject);
-	#pragma linkname "insert_object"
+external void setObject( JSONObject& object, string key, JSONObject innerObject);
+	#pragma linkname "set_object"
 	#pragma linkobj "src/JSONBuilder/json_builder.o"
 	#pragma linksign [1, 2, 3]
 	#pragma refcounting [0,2]
