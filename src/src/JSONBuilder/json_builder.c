@@ -93,7 +93,6 @@ void set_object( SAC_cJSON ** object, SAC_array_descriptor_t * object_descriptor
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
 	}
 	set_item( (*object), key, inner_object->head);
-	// cJSON_AddItemToObject( (*object)->head, copy_string( key), inner_object->head);
 	SAC_FREE( inner_object_descriptor);
 }
 
@@ -102,11 +101,23 @@ void add_to_array( SAC_cJSON * array, cJSON * item)
 {
 	cJSON_AddItemToArray( array->head, item);
 }
+void replace_in_array( SAC_cJSON * array, cJSON * item, int index)
+{
+	if( index < 0)
+	{
+		SAC_RuntimeError( "Given index is below zero!");
+
+	}
+	if( index >= cJSON_GetArraySize(array->head))
+	{
+		SAC_RuntimeWarning( "Given index is above of the array's bounds; Nothing will be replaced!");
+	}
+	cJSON_ReplaceItemInArray( array->head, index, item);
+}
 //// Booleans
+////// Insertion
 void add_bool_to_array( SAC_cJSON * array, bool boolean)
 {
-	// cJSON * value;
-	// value = ;
 	add_to_array( array, cJSON_CreateBool( boolean));
 }
 void add_true_to_array( SAC_cJSON * array)
@@ -117,31 +128,62 @@ void add_false_to_array( SAC_cJSON * array)
 {
 	add_bool_to_array(array, false);
 }
+////// Replacement
+void replace_with_bool_in_array( SAC_cJSON * array, bool boolean, int index)
+{
+	replace_in_array( array, cJSON_CreateBool( boolean), index);
+}
+void replace_with_true_in_array( SAC_cJSON * array, int index)
+{
+	replace_with_bool_in_array( array, true, index);
+}
+void replace_with_false_in_array( SAC_cJSON * array, int index)
+{
+	replace_with_bool_in_array( array, false, index);
+}
 //// Numbers
+////// Insertion
 void add_int_to_array( SAC_cJSON * array, int number)
 {
-	cJSON * value;
-	value = cJSON_CreateNumber( number);
-	add_to_array( array, value);
+	// cJSON * value;
+	// value = ;
+	add_to_array( array, cJSON_CreateNumber( number));
 }
 void add_double_to_array( SAC_cJSON * array, double number)
 {
-	cJSON * value;
-	value = cJSON_CreateNumber( number);
-	add_to_array( array, value);
+	// cJSON * value;
+	// value = ;
+	add_to_array( array, cJSON_CreateNumber( number));
 }
 void add_float_to_array( SAC_cJSON * array, float number)
 {
-	cJSON * value;
-	value = cJSON_CreateNumber( (double)number);
-	add_to_array( array, value);
+	// cJSON * value;
+	// value = ;
+	add_to_array( array, cJSON_CreateNumber( (double)number));
+}
+////// Replacement
+void replace_with_int_in_array( SAC_cJSON * array, int number, int index)
+{
+	replace_in_array( array, cJSON_CreateNumber( number), index);
+}
+void replace_with_double_in_array( SAC_cJSON * array, double number, int index)
+{
+	replace_in_array( array, cJSON_CreateNumber( number), index);
+}
+void replace_with_float_in_array( SAC_cJSON * array, float number, int index)
+{
+	replace_in_array( array, cJSON_CreateNumber( (double)number), index);
 }
 //// String
 void add_string_to_array( SAC_cJSON * array, char * string)
 {
-	cJSON * value;
-	value = cJSON_CreateString( string);
-	add_to_array( array, value);
+	// cJSON * value;
+	// value = ;
+	add_to_array( array, cJSON_CreateString( string));
+}
+void replace_with_string_in_array( SAC_cJSON * array, char * string, int index)
+{
+	replace_in_array( array, cJSON_CreateString( string), index);
 }
 //// Array & Objects
 void add_object_to_array( SAC_cJSON ** array, SAC_array_descriptor_t * array_descriptor,
@@ -152,6 +194,17 @@ void add_object_to_array( SAC_cJSON ** array, SAC_array_descriptor_t * array_des
 		SAC_RuntimeError( "Trying to insert non-root JSON object!");
 	}
 	add_to_array( (*array), object->head);
+	SAC_FREE( object_descriptor);
+}
+void replace_with_object_in_array(SAC_cJSON ** array, SAC_array_descriptor_t * array_descriptor,
+									SAC_cJSON * object, SAC_array_descriptor_t object_descriptor,
+									int index)
+{
+	if( object->head != object->root)
+	{
+		SAC_RuntimeError( "Trying to insert non-root JSON object!");
+	}
+	replace_in_array( (*array), object->head, index);
 	SAC_FREE( object_descriptor);
 }
 
