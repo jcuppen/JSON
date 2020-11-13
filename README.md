@@ -10,15 +10,23 @@ Currently this is a work in progress.
 - Booleans
 	- Insertion into JSON object
 	- Insertion into JSON array
+	- Replacing elements in JSON arrays with Booleans
 - Numbers (int, float, double)
 	- Insertion into JSON object
 	- Insertion into JSON array
+	- Replacing elements in JSON arrays with Numbers
 - Strings
 	- Insertion into JSON object
 	- Insertion into JSON array
+	- Replacing elements in JSON arrays with Strings
 - Arrays
 	- Insertion into JSON object
-	- Insertion of additional elements after insertion by means of changing focus.
+	- Insertion of additional elements after insertion by means of changing focus
+	- Replacing elements in JSON arrays with JSON arrays
+- Objects
+	- Insertion into JSON object
+	- Insertion of additional elements after insertion by means of changing focus
+	- Replacing elements in JSON arrays with JSON objects
 - Serialization to stdout of:
 	- JSON objects
 	- JSON arrays

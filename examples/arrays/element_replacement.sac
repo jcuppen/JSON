@@ -1,0 +1,32 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_array = createJSONArray();
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	addBoolToArray( json_array, true);
+	serializeJSONObject(json_array);
+
+	obj = createJSONObject();
+	inner_arr = createJSONArray();
+
+	replaceWithBoolInArray( json_array, true, 0);
+	replaceWithTrueInArray( json_array, 1);
+	replaceWithFalseInArray( json_array, 2);
+	replaceWithIntInArray( json_array, 4, 3);
+	replaceWithDoubleInArray( json_array, 2.3, 4);
+	replaceWithFloatInArray( json_array, 4.3f, 5);
+	replaceWithStringInArray( json_array, "HELLO", 6);
+	replaceWithObjectInArray( json_array, obj, 7);
+	replaceWithArrayInArray( json_array, inner_arr, 8);
+	serializeJSONObject(json_array);
+	return 0;
+}

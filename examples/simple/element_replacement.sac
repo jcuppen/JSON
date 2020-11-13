@@ -1,0 +1,40 @@
+use StdIO: all;
+use JSON: all;
+
+int main()
+{
+	json_array = createJSONArray();
+	addBoolToArray( json_array, true);
+
+	inner_object = createJSONObject();
+	setInt( inner_object, "int", 5);
+
+	json_object = createJSONObject();
+	setBool(json_object, "becomesFalse", true);
+	setBool(json_object, "becomesFalseAsWell", true);
+	setBool(json_object, "becomesTrue", false);
+	setInt(json_object, "becomes42", 2);
+	setDouble(json_object, "becomes3.14", 1.1);
+	setFloat(json_object, "becomes2.1f", 1.2f);
+	setString(json_object, "becomesBYE", "HELLO");
+	setArray(json_object, "becomes[]", json_array);
+	setObject(json_object, "becomes{}", inner_object);
+
+	serializeJSONObject(json_object);
+
+	new_array = createJSONArray();
+	new_object = createJSONObject();
+
+	setBool(json_object, "becomesFalse", false);
+	setFalse(json_object, "becomesFalseAsWell");
+	setTrue(json_object, "becomesTrue");
+	setInt( json_object, "becomes42", 42);
+	setDouble( json_object, "becomes3.14", 3.14);
+	setFloat( json_object, "becomes2.1f", 2.1f);
+	setString( json_object, "becomesBYE", "BYE");
+	setArray( json_object, "becomes[]", new_array);
+	setObject( json_object, "becomes{}", new_object);
+
+	serializeJSONObject(json_object);
+	return 0;
+}

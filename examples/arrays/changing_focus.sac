@@ -7,7 +7,7 @@ int main()
 	json_array = createJSONArray();
 	addBoolToArray( json_array, true);
 
-	insertArray( json_object, "myBoolArr", json_array);
+	setArray( json_object, "myBoolArr", json_array);
 
 	serializeJSONObject( json_object);
 

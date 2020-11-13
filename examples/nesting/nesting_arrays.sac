@@ -25,7 +25,7 @@ int main()
 	addArrayToArray( outer_array, inner_array2);
 	addArrayToArray( outer_array, inner_array3);
 
-	insertArray( root, "matrix", outer_array);
+	setArray( root, "matrix", outer_array);
 
 	serializeJSONObject( root);
 
